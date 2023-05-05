@@ -3,8 +3,8 @@ permissions:
 
 on:
   push:
-    tags:
-      - "*.*.*"
+    branches:
+      - "main"
 
 jobs:
   build_wheel:
@@ -23,6 +23,7 @@ jobs:
       - name: Release
         uses: "softprops/action-gh-release@v1"
         with:
+          name: "${{ steps.Buildwheel.outputs.VERSION }}"
           token: "${{ secrets.GITHUB_TOKEN }}"
           files: |
             ./dist/*.whl
