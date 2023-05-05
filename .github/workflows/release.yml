@@ -20,7 +20,6 @@ jobs:
       - name: Release
         uses: "softprops/action-gh-release@v1"
         with:
-          title: ${{ steps.Buildwheel.outputs.VERSION }}
           files: |
             ./dist/*.whl
 
