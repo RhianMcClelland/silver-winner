@@ -2,7 +2,7 @@
 import setuptools 
 
 setuptools.setup(name='silverwinner',
-      version='0.0.3', 
+      version='0.0.4', 
       author = 'Rhian McClelland',
       python_requires='>=3.11.0',
       package_dir={"": "src"},
