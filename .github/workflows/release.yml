@@ -1,0 +1,30 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_wheel:
+    runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.Buildwheel.outputs.test }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: SetUpPython
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11
+      - name: Buildwheel
+        run: |
+          python -m pip install --user --upgrade build
+          python -m build .
+          python setup.py --version >> "$GITHUB_OUTPUT"
+      - name: Release
+        uses: "marvinpinto/action-automatic-releases@latest"
+          with:
+            repo_token: "${{ secrets.GITHUB_TOKEN }}"
+            automatic_release_tag: "latest"
+            prerelease: true
+            title: ${{needs.build_wheel.outputs.output1}}
+            files: |
+              ./dist/*.whl
