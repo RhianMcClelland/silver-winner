@@ -18,7 +18,7 @@ jobs:
         run: |
           python -m pip install --user --upgrade build
           python -m build .
-          python setup.py --version >> "$GITHUB_OUTPUT"
+          echo python setup.py --version >> "$GITHUB_OUTPUT"
       - name: Release
         uses: "marvinpinto/action-automatic-releases@latest"
           with:
