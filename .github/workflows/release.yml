@@ -18,11 +18,9 @@ jobs:
           python -m build .
           echo "VERSION = $(python setup.py --version)" >> $GITHUB_OUTPUT
       - name: Release
-        uses: "marvinpinto/action-automatic-releases@latest"
+        uses: "softprops/action-gh-release@v1"
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: true
+          tag_name: ${{ steps.Buildwheel.outputs.VERSION }}
           title: ${{ steps.Buildwheel.outputs.VERSION }}
           files: |
             ./dist/*.whl
